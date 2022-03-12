@@ -1,0 +1,114 @@
+swagger: "2.0"
+info:
+  description: "this is an API of a list of users"
+  version: "1.0.0"
+  title: "Api ReqRes Users"
+  contact:
+    email: sergiosanchezv20@gmail.com
+    
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: "reqres.in"
+basePath: "/api/users"
+schemes:
+- "https"
+paths:
+  /users{userId}:
+    get:
+      tags:
+      - "user"
+      summary: "Find user by id"
+      description: "Returns a single user"
+      operationId: "getUserById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "userId"
+        description: ""
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "404":
+          description: "user not found"
+  /users:      
+    post:
+      tags:
+      - "user"
+      summary: "Add a new user"
+      description: "Create a new user"
+      operationId: "new user"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/userPostPut"
+      responses:
+        "400":
+          description: "Bad Request"
+        "201":
+          description: "User created successfully"
+  /users/{Id}:
+    put:
+        tags:
+        - "user"
+        summary: "Update an existing user"
+        description: ""
+        operationId: "updateUser"
+        consumes:
+        - "application/json"
+        produces:
+        - "application/json"
+        parameters:
+        - in: "path"
+          name: "Id"
+          description: ""
+          required: true
+          type: "string"
+        - in: "body" 
+          name: "body"
+          description: "User to be updated"
+          required: true
+          schema:
+           $ref: "#/definitions/userPostPut"
+        responses:
+          "200":
+            description: "User updated successfully"
+          "400":
+            description: "Bad Request"    
+    delete:
+        tags:
+        - "user"
+        summary: "Deletes a user"
+        description: ""
+        operationId: "deleteUser"
+        produces:
+        - "application/json"
+        parameters:
+        - in: "path"
+          name: "Id"
+          description: ""
+          required: true
+          type: "string"
+        responses:
+          "204":
+            description: "No content"
+definitions:
+  userPostPut: 
+    type: "object"
+    properties:
+      name: 
+        type: "string"
+      job:
+        type: "string"            
+        
